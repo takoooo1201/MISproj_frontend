@@ -1,0 +1,28 @@
+<div>
+  <h2>登入頁面</h2>
+  <form (ngSubmit)="onSubmit()" style="text-align:center">
+    <label for="username">條碼:</label>
+    <input type="text" id="username" [(ngModel)]="username" placeholder="Enter your username" name="username" required>
+    <br>
+
+    <label for="password">載具密碼:</label>
+    <input type="password" id="password" [(ngModel)]="password" placeholder="Enter your password" name="password" required>
+    <br>
+
+    <button type="submit" [disabled]="isLoading">{{ isLoading ? '載入中...' : '登入' }}</button>
+  </form>
+
+  <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+    {{ errorMessage }}
+  </div>
+
+  <mat-card *ngIf="responseData && !isLoading" class="response-card">
+    <mat-card-header>
+      <mat-card-title>回應數據</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h2>{{responseData["msg"]}}</h2>
+      <pre>{{ responseData | json }}</pre>
+    </mat-card-content>
+  </mat-card>
+</div>
